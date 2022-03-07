@@ -28,8 +28,8 @@ public struct CubeAttributesAnimator: LayoutAttributesAnimator {
         guard let contentView = attributes.contentView else { return }
         
         if abs(position) >= 1 {
-            contentView.layer.transform = CATransform3DIdentity
-            contentView.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+            attributes.transform3D = CATransform3DIdentity
+            attributes.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         } else if attributes.scrollDirection == .horizontal {
             let rotateAngle = totalAngle * position
             let anchorPoint = CGPoint(x: position > 0 ? 0 : 1, y: 0.5)
@@ -44,8 +44,8 @@ public struct CubeAttributesAnimator: LayoutAttributesAnimator {
             transform.m34 = perspective
             transform = CATransform3DRotate(transform, rotateAngle, 0, 1, 0)
             
-            contentView.layer.transform = transform
-            contentView.layer.anchorPoint = anchorPoint
+            attributes.transform3D = transform
+            attributes.anchorPoint = anchorPoint
         } else {
             let rotateAngle = totalAngle * position
             let anchorPoint = CGPoint(x: 0.5, y: position > 0 ? 0 : 1)
@@ -60,8 +60,8 @@ public struct CubeAttributesAnimator: LayoutAttributesAnimator {
             transform.m34 = perspective
             transform = CATransform3DRotate(transform, rotateAngle, -1, 0, 0)
             
-            contentView.layer.transform = transform
-            contentView.layer.anchorPoint = anchorPoint
+            attributes.transform3D = transform
+            attributes.anchorPoint = anchorPoint
         }
     }
 }
